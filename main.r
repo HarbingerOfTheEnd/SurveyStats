@@ -39,19 +39,27 @@ barplot(
   xlab = "Hours",
   ylab = "Frequency",
 )
-legend("topright", legend = rownames(table1))
+legend(
+  "topright",
+  legend = rownames(table1),
+  fill = c("green", "blue", "red", "yellow")
+)
 
 # # Barplot for SocializingTimePerWeek
 table2 <- table(df$Age, df$ExtraCurricularTimePerWeek)
 barplot(
   table2,
   beside = TRUE,
-  col = c("orange"),
+  col = c("green", "blue", "red", "yellow"),
   main = "Socializing Time Per Week",
   xlab = "Hours",
   ylab = "Frequency"
 )
-legend("topright", legend = rownames(table2))
+legend(
+  "topright",
+  legend = rownames(table2),
+  fill = c("green", "blue", "red", "yellow")
+)
 
 boxplot(
   LectureTimePerWeek ~ Age,
@@ -88,7 +96,11 @@ correlation_age_lecture <- cor(
   method = "pearson"
 )
 cat(
-  "Pearson correlation coefficient between Age and Lecture Time Per Week:",
+  paste(
+    "Pearson correlation coefficient between extra",
+    "curricular activity time per week and Lecture Time Per Week:",
+    sep = " "
+  ),
   correlation_age_lecture,
   "\n"
 )
@@ -106,3 +118,9 @@ plot(
   df$ExtraCurricularTimePerWeek,
 )
 abline(regression_model, col = "red")
+
+cov1 <- cov(df$LectureTimePerWeek, df$ExtraCurricularTimePerWeek)
+print(cov1)
+
+print(sd(df$LectureTimePerWeek))
+print(sd(df$ExtraCurricularTimePerWeek))
